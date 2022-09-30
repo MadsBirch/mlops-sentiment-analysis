@@ -6,6 +6,7 @@ This is a project on Sentiment Analysis using Transformers for the Machine Learn
 The data can be found at:
 https://www.kaggle.com/datasets/bittlingmayer/amazonreviews?resource=download
 
+http://jmcauley.ucsd.edu/data/amazon/links.html
 
 Project Organization
 ------------
