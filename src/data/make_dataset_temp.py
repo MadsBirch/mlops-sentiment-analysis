@@ -1,6 +1,7 @@
 import pandas as pd
 import gzip, json
 
+from sklearn.model_selection import train_test_split
 from src.data.AmazonReviewData import AmazonReviewsDataset
 
 def parse(path):
@@ -30,7 +31,7 @@ def get_pandas_DF(path):
   return pd.DataFrame.from_dict(df, orient='index')
 
 
-def preprocess_data(tokenizer, max_len = 256, train_split = 0.7):
+def preprocess_data(raw_data_path, tokenizer, max_len = 256, train_split = 0.7):
   
   # get pandas df
   df = get_pandas_DF(raw_data_path+'reviews_Automotive_5.json.gz')
