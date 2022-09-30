@@ -1,7 +1,11 @@
 Amazon Review Sentiment Analysis using Transformers
 ==============================
 
-This is a project on Sentiment Analysis using transformers for the Machine Learning Operations course at DTU.
+This is a project on Sentiment Analysis using Transformers for the Machine Learning Operations course at DTU.
+
+The data can be found at:
+https://www.kaggle.com/datasets/bittlingmayer/amazonreviews?resource=download
+
 
 Project Organization
 ------------
