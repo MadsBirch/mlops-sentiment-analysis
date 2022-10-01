@@ -1,8 +1,15 @@
 import pandas as pd
 import gzip, json
 
+from torch.utils.data import DataLoader
+from transformers import BertModel, BertTokenizer, DistilBertModel, DistilBertTokenizer
 from sklearn.model_selection import train_test_split
 from src.data.AmazonReviewData import AmazonReviewsDataset
+
+raw_data_path = "data/raw/"
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
+#tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
 
 def parse(path):
   g = gzip.open(path, 'rb')
@@ -50,3 +57,11 @@ def preprocess_data(raw_data_path, tokenizer, max_len = 256, train_split = 0.7):
   test_set = AmazonReviewsDataset(df_test, tokenizer=tokenizer, max_len=max_len)
     
   return train_set, test_set
+
+
+def get_dataloaders(batch_size = 32, num_workers = 0):
+  train_set, test_set = preprocess_data(raw_data_path=raw_data_path, tokenizer = tokenizer)
+  train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+  valid_loader = DataLoader(test_set, batch_size=batch_size, num_workers=num_workers)
+  
+  return train_loader, valid_loader
