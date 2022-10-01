@@ -51,16 +51,16 @@ def preprocess_data(raw_data_path, tokenizer, max_len = 256, train_split = 0.7):
   df.sentiment = df.sentiment.apply(sentiment_map)
   
   # split into train test set
-  df_train, df_test = train_test_split(df, train_size=train_split, random_state=0)
+  train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
   
-  train_set = AmazonReviewsDataset(df_train, tokenizer=tokenizer, max_len=max_len)
-  test_set = AmazonReviewsDataset(df_test, tokenizer=tokenizer, max_len=max_len)
+  train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
+  test_set = AmazonReviewsDataset(test_df, tokenizer=tokenizer, max_len=max_len)
     
-  return train_set, test_set
+  return train_df, test_df, train_set, test_set
 
 
 def get_dataloaders(batch_size = 32, num_workers = 0):
-  train_set, test_set = preprocess_data(raw_data_path=raw_data_path, tokenizer = tokenizer)
+  _, _, train_set, test_set = preprocess_data(raw_data_path=raw_data_path, tokenizer = tokenizer)
   train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers)
   valid_loader = DataLoader(test_set, batch_size=batch_size, num_workers=num_workers)
   
