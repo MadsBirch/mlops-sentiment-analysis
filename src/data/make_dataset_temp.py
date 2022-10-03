@@ -59,8 +59,8 @@ def preprocess_data(raw_data_path, tokenizer, max_len = 256, train_split = 0.7):
   return train_df, test_df, train_set, test_set
 
 
-def get_dataloaders(batch_size = 32, num_workers = 0):
-  _, _, train_set, test_set = preprocess_data(raw_data_path=raw_data_path, tokenizer = tokenizer)
+def get_dataloaders( max_len: int, batch_size = 32, num_workers = 0):
+  _, _, train_set, test_set = preprocess_data(raw_data_path=raw_data_path, tokenizer = tokenizer, max_len = max_len)
   train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers)
   valid_loader = DataLoader(test_set, batch_size=batch_size, num_workers=num_workers)
   
