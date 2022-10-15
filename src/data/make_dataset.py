@@ -5,13 +5,14 @@ from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 
 import pandas as pd
-import gzip, json
+import gzip, json, os, urllib
 
 import torch
-from torch.utils.data import DataLoader
-from transformers import BertModel, BertTokenizer, DistilBertModel, DistilBertTokenizer
+from transformers import BertTokenizer
 from sklearn.model_selection import train_test_split
 from src.data.AmazonReviewData import AmazonReviewsDataset
+
+
 
 # define a pretrained tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
@@ -44,10 +45,10 @@ def sentiment_map(x):
     return 1
 
 
-def preprocess_data(raw_data_path, max_len = 24, train_split = 0.7):
+def preprocess_data(raw_data_path, max_len = 20, train_split = 0.7):
   
   # get pandas df
-  df = get_pandas_DF(raw_data_path+'reviews_Automotive_5.json.gz')
+  df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
   
   # subset columns and rename to more intuitive names 
   df = df[['overall', 'reviewText']]
@@ -75,10 +76,17 @@ def main(input_filepath, output_filepath):
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
     
+    # download dataset file if not in folder
+    url = 'http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automotive_5.json.gz'
+    name = url.split("/")[-1] 
+    filename = os.path.join(input_filepath, name)
+    if not os.path.isfile(filename):
+        urllib.request.urlretrieve(url, filename)
+    
     # get train and test set from input path -> save to output path
     train_set, test_set = preprocess_data(input_filepath)
-    torch.save(train_set, output_filepath+'train_set')
-    torch.save(test_set, output_filepath+'tetst_set')
+    torch.save(train_set, output_filepath+'/train_set.pth')
+    torch.save(test_set, output_filepath+'/test_set.pth')
 
 
 if __name__ == '__main__':

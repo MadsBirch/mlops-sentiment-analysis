@@ -6,6 +6,16 @@ This is a project on Sentiment Analysis using Transformers for the Machine Learn
 The dataset of Amazon reviews within the "Automotive" conisting of 20,473 samples, can be found at:
 http://jmcauley.ucsd.edu/data/amazon/links.html
 
+http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automotive_5.json.gz
+
+Create dataset, train model and test model using the commands:
+
+make data
+
+make train
+
+make predict
+
 Project Organization
 ------------
 

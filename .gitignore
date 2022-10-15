@@ -22,6 +22,8 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+models/
+data/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -76,7 +78,7 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-#/data/
+/data/
 
 # Mac OS-specific storage files
 .DS_Store
