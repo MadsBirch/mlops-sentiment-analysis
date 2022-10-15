@@ -4,6 +4,66 @@ import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 
+import pandas as pd
+import gzip, json
+
+import torch
+from torch.utils.data import DataLoader
+from transformers import BertModel, BertTokenizer, DistilBertModel, DistilBertTokenizer
+from sklearn.model_selection import train_test_split
+from src.data.AmazonReviewData import AmazonReviewsDataset
+
+# define a pretrained tokenizer
+tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
+
+# load zipped json file
+def parse(path):
+  g = gzip.open(path, 'rb')
+  for l in g:
+    yield json.loads(l)
+
+# create pandas DF
+def get_pandas_DF(path):
+  i = 0
+  df = {}
+  for d in parse(path):
+    df[i] = d
+    i += 1
+ 
+  return pd.DataFrame.from_dict(df, orient='index')
+
+# map rating into sentiment scores
+def sentiment_map(x):
+  if x < 3:
+    return 0
+  
+  elif x > 3:
+    return 2
+  
+  else:
+    return 1
+
+
+def preprocess_data(raw_data_path, max_len = 24, train_split = 0.7):
+  
+  # get pandas df
+  df = get_pandas_DF(raw_data_path+'reviews_Automotive_5.json.gz')
+  
+  # subset columns and rename to more intuitive names 
+  df = df[['overall', 'reviewText']]
+  df = df.rename(columns={'overall': 'sentiment', 'reviewText': 'review'})
+  
+  # do sentiment mapping
+  df.sentiment = df.sentiment.apply(sentiment_map)
+  
+  # split into train test set
+  train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
+  
+  train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
+  test_set = AmazonReviewsDataset(test_df, tokenizer=tokenizer, max_len=max_len)
+    
+  return train_set, test_set
+
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
@@ -14,6 +74,11 @@ def main(input_filepath, output_filepath):
     """
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
+    
+    # get train and test set from input path -> save to output path
+    train_set, test_set = preprocess_data(input_filepath)
+    torch.save(train_set, output_filepath+'train_set')
+    torch.save(test_set, output_filepath+'tetst_set')
 
 
 if __name__ == '__main__':
