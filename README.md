@@ -8,13 +8,15 @@ http://jmcauley.ucsd.edu/data/amazon/links.html
 
 http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automotive_5.json.gz
 
-Create dataset, train model and test model using the commands:
+Create dataset
 
-make data
+python src/data/make_dataset.py data/raw data/processed 
 
-make train
+Train model:
+make train or src/models/train_model.py
 
-make predict
+Test model:
+make predict or src/models/predict_model.py
 
 Project Organization
 ------------
