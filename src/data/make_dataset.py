@@ -20,14 +20,14 @@ tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 
 
 # load zipped json file
-def parse(path):
+def parse(path: str):
     g = gzip.open(path, "rb")
     for z in g:
         yield json.loads(z)
 
 
 # create pandas DF
-def get_pandas_DF(path):
+def get_pandas_DF(path: str):
     i = 0
     df = {}
     for d in parse(path):
@@ -38,7 +38,7 @@ def get_pandas_DF(path):
 
 
 # map rating into sentiment scores
-def sentiment_map(x):
+def sentiment_map(x: float) -> int:
     if x < 3:
         return 0
 
@@ -49,7 +49,7 @@ def sentiment_map(x):
         return 1
 
 
-def preprocess_data(raw_data_path, max_len=20, train_split=0.7):
+def preprocess_data(raw_data_path: str, max_len=20, train_split=0.7):
 
     # get pandas df
     df = get_pandas_DF(raw_data_path + "/reviews_Automotive_5.json.gz")
