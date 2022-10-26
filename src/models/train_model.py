@@ -8,7 +8,8 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from src.models.model import BertSentiment
+# from src.models.model import BertSentiment
+from model import BertSentiment
 
 torch.manual_seed(0)
 np.random.seed(0)
