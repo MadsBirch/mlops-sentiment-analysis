@@ -17,7 +17,6 @@ COPY Makefile Makefile
 RUN apt-get update && apt-get install git -y
 
 # To use make: 
-# RUN apt-get update && apt-get install make
 RUN apt install build-essential -y --no-install-recommends
 
 # Set the working directory in our container and add commands that install the dependencies:
