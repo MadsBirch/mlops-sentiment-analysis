@@ -23,6 +23,11 @@ RUN apt install build-essential -y --no-install-recommends
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
+# Retrieve the data: 
+RUN make data
+
+# Remove the extra src folder that gets created: 
+RUN rm -r ./src/src
 RUN pip install -e.
 
 # Name our training script as the entrypoint (CMD) for our docker image. The entrypoint is the application that we want to run when the image is being executed:
