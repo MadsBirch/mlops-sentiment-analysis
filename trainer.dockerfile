@@ -9,6 +9,7 @@ apt clean && rm -rf /var/lib/apt/lists/*
 # Copy over our application (the essential parts) from our computer to the container:
 COPY requirements.txt requirements.txt
 COPY setup.py setup.py
+COPY test_environment.py test_environment.py
 COPY src/ src/
 COPY data/ data/
 COPY Makefile Makefile
