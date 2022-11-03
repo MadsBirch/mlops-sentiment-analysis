@@ -10,8 +10,8 @@ import gzip, json, os, urllib
 import torch
 from transformers import BertTokenizer
 from sklearn.model_selection import train_test_split
-from src.data.AmazonReviewData import AmazonReviewsDataset
-
+from AmazonReviewData import AmazonReviewsDataset
+#"export KMP_DUPLICATE_LIB_OK=TRUE"
 
 
 # define a pretrained tokenizer
