@@ -9,6 +9,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
+import hydra
 
 from src.models.model import BertSentiment
 
@@ -18,6 +19,15 @@ random.seed(0)
 
 # set device to Apple M1 GPU if available
 device = "mps" if torch.backends.mps.is_available() else "cpu"
+
+@hydra.train(config_name="train.yaml")
+
+
+def main(cfg):
+    print(cfg.hyperparameters.batch_size, cfg.hyperparameters.lr , cfg.hyperparameters.epochs)
+
+if __name__ == "__main__":
+    main
 
 # hyper parameters
 class hp:

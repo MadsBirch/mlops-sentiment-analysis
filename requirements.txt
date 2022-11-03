@@ -103,3 +103,4 @@ webencodings==0.5.1
 websocket-client==1.4.1
 widgetsnbextension==4.0.3
 zipp==3.9.0
+hydra-core==1.2.0
