@@ -29,7 +29,8 @@ RUN make data
 
 # Remove the extra src folder that gets created: 
 RUN rm -r ./src/src
-RUN pip install -e.
+RUN pip install -e .
+#RUN wandb.login(key="bd3fd38b22f78a0420f42abfc8b978d7ae49d44c")
 
 # Name our training script as the entrypoint (CMD) for our docker image. The entrypoint is the application that we want to run when the image is being executed:
 CMD ["make", "train"]
