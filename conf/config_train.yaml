@@ -1,0 +1,7 @@
+#optimizer: AdamW
+lr: 1e-5
+#eps: 1e-8
+batch_size:  24
+epochs: 10
+
+
