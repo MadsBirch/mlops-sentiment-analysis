@@ -77,12 +77,11 @@ def train_one_epoch(model, trainloader, optimizer, loss_fn):
 
 def evaluate_one_epoch(model, testloader, loss_fn):
   
-  model.eval()
-  
   test_loss = 0
   n_correct = 0
   total = 0
   
+  model.eval()
   with torch.no_grad():
       for batch in tqdm(testloader):
           
@@ -110,8 +109,8 @@ def main():
   # define hyper parameters
   lr  =  wandb.config.lr
   dropout = wandb.config.dropout
-  bs = 128
-  epochs = 10
+  bs = 256
+  epochs = 5
   
   # create data loaders
   trainloader = DataLoader(train_set, batch_size=bs, shuffle=True, num_workers=0)

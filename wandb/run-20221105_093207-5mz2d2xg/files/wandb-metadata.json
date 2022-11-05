@@ -1,0 +1,34 @@
+{
+    "os": "macOS-13.0-arm64-arm-64bit",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-11-05T08:32:08.102511",
+    "startedAt": "2022-11-05T08:32:07.418635",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/Users/madsbirch/Documents/4_semester/mlops/mlops-sentiment-analysis/src/models/train.py",
+    "codePath": "src/models/train.py",
+    "git": {
+        "remote": "https://github.com/MadsBirch/mlops-sentiment-analysis.git",
+        "commit": "042fb677340716c9503cb57544905d33d1511ca9"
+    },
+    "email": "sdam94@gmail.com",
+    "root": "/Users/madsbirch/Documents/4_semester/mlops/mlops-sentiment-analysis",
+    "host": "Madss-MacBook-Pro.local",
+    "username": "madsbirch",
+    "executable": "/Users/madsbirch/Documents/4_semester/mlops/mlops-sentiment-analysis/env/bin/python3",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "disk": {
+        "total": 460.4317207336426,
+        "used": 233.8461456298828
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}
