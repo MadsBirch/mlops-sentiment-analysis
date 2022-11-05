@@ -6,11 +6,11 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
 
-from src.models.model import *
+from src.models.model import BertSentiment
 
 data_path = 'data/processed'
 
-# hyper parameters 
+# hyper parameters
 class hp:
   batch_size = 24
   lr = 1e-5
