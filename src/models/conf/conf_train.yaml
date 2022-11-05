@@ -1,0 +1,5 @@
+batch_size: 24
+lr: 3.0e-05
+num_epochs: 10
+n_classes : 3
+dropout : 0.2
