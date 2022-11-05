@@ -1,0 +1,6 @@
+wandb_version: 1
+
+dropout:
+  value: 0.3
+lr:
+  value: 1.0e-05

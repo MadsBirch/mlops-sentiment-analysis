@@ -18,6 +18,8 @@ torch.manual_seed(0)
 np.random.seed(0)
 random.seed(0)
 
+conf_path = '/Users/madsbirch/Documents/4_semester/mlops/mlops-sentiment-analysis/src/models/conf'
+
 # set device to Apple M1 GPU if available
 device = "mps" if torch.backends.mps.is_available() else "cpu"
 
@@ -105,7 +107,7 @@ def evaluate_one_epoch(model, testloader, loss_fn):
   return loss_epoch, acc
 
 def main():
-  with open('conf/conf_train.yaml') as file:
+  with open(conf_path+'/conf_train.yaml') as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
   
   run = wandb.init(config=config)
