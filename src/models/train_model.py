@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+import yaml
 
 import torch
 import torch.nn as nn
@@ -104,8 +105,11 @@ def evaluate_one_epoch(model, testloader, loss_fn):
   return loss_epoch, acc
 
 def main():
-  run = wandb.init()
+  with open('conf/conf_train.yaml') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
   
+  run = wandb.init(config=config)
+
   # define hyper parameters
   lr  =  wandb.config.lr
   dropout = wandb.config.dropout

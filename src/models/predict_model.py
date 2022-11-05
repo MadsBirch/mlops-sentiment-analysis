@@ -31,21 +31,21 @@ def main(cfg: DictConfig):
         loss_fn = nn.CrossEntropyLoss()
 
         TEST_ACC = []
-    with torch.no_grad():
-        for batch in tqdm(test_loader):
-            
-            review = batch['review']
-            input_ids = batch['input_ids']
-            attention_mask = batch['attention_mask']
-            labels = batch['labels']
-            
-            outputs = model(input_ids, attention_mask)
-            
-            preds = torch.argmax(F.softmax(outputs, dim = 1),dim=1)
-            n_correct += (preds == labels).sum().item()
-            total += labels.size(0)
+        with torch.no_grad():
+            for batch in tqdm(test_loader):
+                
+                review = batch['review']
+                input_ids = batch['input_ids']
+                attention_mask = batch['attention_mask']
+                labels = batch['labels']
+                
+                outputs = model(input_ids, attention_mask)
+                
+                preds = torch.argmax(F.softmax(outputs, dim = 1),dim=1)
+                n_correct += (preds == labels).sum().item()
+                total += labels.size(0)
 
-            acc = (n_correct/total)*100
+                acc = (n_correct/total)*100
 
         if display:
             print(f'Accuracy on the test set: {acc:.2f} %')
@@ -53,4 +53,4 @@ def main(cfg: DictConfig):
     return
 
 if __name__ == "__main__":
-    test(model, test_loader, display=True)
+    main()
