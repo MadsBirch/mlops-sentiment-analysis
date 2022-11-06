@@ -14,36 +14,23 @@ import torch.nn.functional as F
 
 from src.models.model import BertSentiment
 
-torch.manual_seed(0)
-np.random.seed(0)
-random.seed(0)
-
-conf_path = '/Users/madsbirch/Documents/4_semester/mlops/mlops-sentiment-analysis/src/models/conf'
-
 # set device to Apple M1 GPU if available
 device = "mps" if torch.backends.mps.is_available() else "cpu"
 
-# set up wandb sweep
-sweep_configuration = {
-    'method': 'random',
-    'name': 'sweep',
-    'metric': {
-        'goal': 'maximize', 
-        'name': 'test_acc'
-               },
-    'parameters': {
-        'dropout': {'values': [0.1, 0.2, 0.3]},
-        'lr': {'values': [1e-3, 1e-4, 1e-5]}
-     }
-}
+def get_dataloaders(train_set, val_set, bs):
+  trainloader = DataLoader(train_set, batch_size=bs, shuffle=True, num_workers=0)
+  valloader = DataLoader(val_set, batch_size=bs, shuffle=False, num_workers=0)
+  return trainloader, valloader
 
-sweep_id = wandb.sweep(sweep=sweep_configuration, project='mlops_dtu')
+def get_model(dropout = float):
+  return BertSentiment(n_classes=3, dropout=dropout).to(device)
 
-# read data files from path
-data_path = 'data/processed'
-train_set = torch.load(data_path+'/train_set.pth')
-test_set = torch.load(data_path+'/test_set.pth')
-
+def get_optimizer(model, lr, optimizer = 'adam'):
+  if optimizer == 'adam':
+    return optim.Adam(model.parameters(), lr=lr)
+  
+  elif optimizer == 'sgd':
+    return optim.SGD(model.parameters(), momentum=0.9, lr=lr)  
 
 def train_one_epoch(model, trainloader, optimizer, loss_fn):
   
@@ -78,7 +65,7 @@ def train_one_epoch(model, trainloader, optimizer, loss_fn):
   
   return loss_epoch, acc
 
-def evaluate_one_epoch(model, testloader, loss_fn):
+def evaluate_one_epoch(model, valloader, loss_fn):
   
   test_loss = 0
   n_correct = 0
@@ -86,7 +73,7 @@ def evaluate_one_epoch(model, testloader, loss_fn):
   
   model.eval()
   with torch.no_grad():
-      for batch in tqdm(testloader):
+      for batch in tqdm(valloader):
           
           # move data to device
           input_ids = batch['input_ids'].to(device)
@@ -101,47 +88,68 @@ def evaluate_one_epoch(model, testloader, loss_fn):
           n_correct += (preds == labels).sum().item()
           total += labels.size(0)
   
-  loss_epoch = test_loss/len(testloader)
+  loss_epoch = test_loss/len(valloader)
   acc = (n_correct/total)*100
   
   return loss_epoch, acc
 
-def main():
-  with open(conf_path+'/conf_train.yaml') as file:
-        config = yaml.load(file, Loader=yaml.FullLoader)
-  
-  run = wandb.init(config=config)
 
-  # define hyper parameters
+# load hyper parameters to sweep over from config file
+with open('src/models/conf/conf_train.yaml') as file:
+      config = yaml.load(file, Loader=yaml.FullLoader)
+
+# initialize wandb sweep
+sweep_id = wandb.sweep(sweep=config, project='mlops_dtu')
+
+def train():
+  
+  # initialize wndb
+  run = wandb.init(config=config)
+  
+  # define hyper parameters for wandb sweep
   lr  =  wandb.config.lr
   dropout = wandb.config.dropout
+  optimizer = wandb.config.optimizer
+  
+  # define constant hyper parametners
   bs = 256
   epochs = 5
   
+  # read data files from path
+  train_set = torch.load('data/processed/train_set.pth')
+  val_set = torch.load('data/processed/val_set.pth')
+  
   # create data loaders
-  trainloader = DataLoader(train_set, batch_size=bs, shuffle=True, num_workers=0)
-  testloader = DataLoader(test_set, batch_size=bs, shuffle=False, num_workers=0)
+  trainloader, valloader = get_dataloaders(train_set, val_set, bs = bs)
 
   # init model
-  model = BertSentiment(n_classes=3, dropout=dropout).to(device)
-
+  model = get_model(dropout=dropout)
+  
   # define criterion and optimizer
   loss_fn = nn.CrossEntropyLoss().to(device)
-  optimizer = optim.Adam(model.parameters(), lr=lr)
+  optimizer = get_optimizer(model, lr, optimizer=optimizer)
   
   for e in range(epochs):
     print(f'[EPOCH]: {e+1:3d}')
 
     train_loss, train_acc = train_one_epoch(model, trainloader, optimizer, loss_fn)
-    test_loss, test_acc = evaluate_one_epoch(model, testloader, loss_fn)
+    val_loss, val_acc = evaluate_one_epoch(model, valloader, loss_fn)
     
     wandb.log({
         'epoch': e, 
         'train_acc': train_acc,
         'train_loss': train_loss, 
-        'val_acc': test_acc, 
-        'val_loss': test_loss
+        'val_acc': val_acc, 
+        'val_loss': val_loss
       })
-    
-# Start sweep job.
-wandb.agent(sweep_id, function=main, count=4)
+
+# Start sweep
+wandb.agent(sweep_id, function=train, count=10)
+  
+
+  
+  
+  
+  
+  
+  

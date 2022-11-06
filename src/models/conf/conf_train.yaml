@@ -1,11 +1,13 @@
-batch_size: 24
-num_epochs: 5
-n_classes : 3
-lr:
-    - 0.001
-    - 0.0001
-    - 0.00001
-dropout : 
-      - 0.1 
-      - 0.2 
-      - 0.3
+program: train.py
+method: bayes
+metric:
+    name: val_loss
+    goal: minimize
+parameters:
+    lr:
+        min: 0.000001
+        max: 0.0001
+    dropout:
+        values: [0.2, 0.3, 0.4]
+    optimizer:
+        values: ["adam", "sgd"]
