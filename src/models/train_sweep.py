@@ -23,6 +23,7 @@ with open('conf/conf_train_sweep.yaml') as file:
       config = yaml.load(file, Loader=yaml.FullLoader)
 
 # initialize wandb sweep
+wandb.login(key = "bd3fd38b22f78a0420f42abfc8b978d7ae49d44c")
 sweep_id = wandb.sweep(sweep=config, project='mlops_dtu')
 
 def train():

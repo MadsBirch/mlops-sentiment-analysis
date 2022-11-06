@@ -30,14 +30,14 @@ requirements: test_environment
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
-train_sweep:
+train_sweep: data
 	$(PYTHON_INTERPRETER) src/models/train_sweep.py 
 
-train:
+train: data
 	$(PYTHON_INTERPRETER) src/models/train.py
 
 test:
-	$(PYTHON_INTERPRETER) src/models/predict.py models/final_model.pth
+	$(PYTHON_INTERPRETER) src/models/test.py models/final_model.pth
 
 ## Delete all compiled Python files
 clean:

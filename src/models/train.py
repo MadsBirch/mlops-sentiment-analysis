@@ -12,8 +12,9 @@ device = "mps" if torch.backends.mps.is_available() else "cpu"
 # load hyper parameters to sweep over from config file
 with open('conf/conf_train.yaml') as file:
       config = yaml.load(file, Loader=yaml.FullLoader)
-      
+            
 # initialize wandb
+wandb.login(key = "bd3fd38b22f78a0420f42abfc8b978d7ae49d44c")
 wandb.init(config = config, project="mlops_dtu")
 
 def train():
@@ -45,8 +46,8 @@ def train():
   for e in range(epochs):
     print(f'[EPOCH]: {e+1:3d}')
 
-    train_loss, train_acc = train_one_epoch(model, trainloader, optimizer, loss_fn)
-    val_loss, val_acc = evaluate_one_epoch(model, valloader, loss_fn)
+    train_loss, train_acc = train_one_epoch(model, trainloader, optimizer)
+    val_loss, val_acc = evaluate_one_epoch(model, valloader)
     
     wandb.log({
         'epoch': e, 
