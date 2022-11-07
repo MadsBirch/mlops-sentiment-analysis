@@ -38,8 +38,7 @@ def train():
   # init model
   model = get_model(dropout=dropout)
   
-  # define criterion and optimizer
-  loss_fn = nn.CrossEntropyLoss().to(device)
+  # define optimizer
   optimizer = get_optimizer(model, lr, optimizer=optimizer)
   
   # training loop

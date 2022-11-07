@@ -50,15 +50,14 @@ def train():
   # init model
   model = get_model(dropout=dropout)
   
-  # define criterion and optimizer
-  loss_fn = nn.CrossEntropyLoss().to(device)
+  # define optimizer
   optimizer = get_optimizer(model, lr, optimizer=optimizer)
   
   for e in range(epochs):
     print(f'[EPOCH]: {e+1:3d}')
 
-    train_loss, train_acc = train_one_epoch(model, trainloader, optimizer, loss_fn)
-    val_loss, val_acc = evaluate_one_epoch(model, valloader, loss_fn)
+    train_loss, train_acc = train_one_epoch(model, trainloader, optimizer)
+    val_loss, val_acc = evaluate_one_epoch(model, valloader)
     
     wandb.log({
         'epoch': e, 
@@ -69,12 +68,4 @@ def train():
       })
 
 # Start sweep
-wandb.agent(sweep_id, function=train, count=10)
-  
-
-  
-  
-  
-  
-  
-  
+wandb.agent(sweep_id, function=train, count=20)  

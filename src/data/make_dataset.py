@@ -44,7 +44,7 @@ def sentiment_map(x):
     return 1
 
 
-def preprocess_data(raw_data_path, max_len = 20, train_split = 0.7, val_split = 0.1):
+def preprocess_data(raw_data_path, max_len = 24, train_split = 0.7, val_split = 0.1):
   
   # get pandas df
   df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
@@ -56,7 +56,7 @@ def preprocess_data(raw_data_path, max_len = 20, train_split = 0.7, val_split = 
   # do sentiment mapping
   df.sentiment = df.sentiment.apply(sentiment_map)
   
-  # split into train test set
+  # split into train, validation and test set
   train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
   train_df, val_df = train_test_split(train_df, train_size=0.9, random_state=0)
   

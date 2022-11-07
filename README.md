@@ -15,7 +15,7 @@ Create dataset
 - make data
 
 Perform a sweep over hyper parameters
-- make train_sweep
+- make sweep
 
 Train model
 - make train
