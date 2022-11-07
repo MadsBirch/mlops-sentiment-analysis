@@ -1,0 +1,5 @@
+optimizer: 'adam'
+lr: 0.00001
+batch_size:  256
+epochs: 5
+dropout: 0.3

@@ -1,0 +1,8 @@
+wandb_version: 1
+
+dropout:
+  value: 0.3
+lr:
+  value: 5.317948909906631e-05
+optimizer:
+  value: adam

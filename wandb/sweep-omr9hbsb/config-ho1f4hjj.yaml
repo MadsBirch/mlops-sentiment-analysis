@@ -1,0 +1,8 @@
+wandb_version: 1
+
+dropout:
+  value: 0.4
+lr:
+  value: 3.7961565496619906e-05
+optimizer:
+  value: sgd

@@ -1,0 +1,14 @@
+method: bayes
+metric:
+    name: val_acc
+    goal: maximize
+parameters:
+    lr:
+        min: 0.000001
+        max: 0.0001
+    weight_decay:
+        values: [0.1, 0.01, 0.001, 0.0001]
+    dropout:
+        values: [0.2, 0.3, 0.4]
+    optimizer:
+        values: ["adam", "sgd"]

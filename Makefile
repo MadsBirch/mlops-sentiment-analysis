@@ -23,17 +23,21 @@ endif
 ## Install Python Dependencies
 requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	$(PYTHON_INTERPRETER) -m pip install -e .
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
 ## Make Dataset
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
-train:
-	$(PYTHON_INTERPRETER) src/models/train_model.py
+sweep: data
+	$(PYTHON_INTERPRETER) src/models/train_sweep.py 
 
-predict:
-	$(PYTHON_INTERPRETER) src/models/predict_model.py
+train: data
+	$(PYTHON_INTERPRETER) src/models/train.py
+
+test:
+	$(PYTHON_INTERPRETER) src/models/test.py models/final_model.pth
 
 ## Delete all compiled Python files
 clean:
