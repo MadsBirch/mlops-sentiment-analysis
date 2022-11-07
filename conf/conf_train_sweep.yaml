@@ -3,6 +3,8 @@ metric:
     name: val_acc
     goal: maximize
 parameters:
+    epochs: 5
+    batch_size:  256
     lr:
         min: 0.000001
         max: 0.0001
