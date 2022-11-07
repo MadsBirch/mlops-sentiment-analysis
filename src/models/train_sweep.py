@@ -28,30 +28,25 @@ sweep_id = wandb.sweep(sweep=config, project='mlops_dtu')
 
 def train():
   
-  # initialize wndb
+  # initialize wandb
   run = wandb.init(config=config)
-  
-  # define hyper parameters for wandb sweep
-  lr  =  wandb.config.lr
-  dropout = wandb.config.dropout
-  optimizer = wandb.config.optimizer
-  bs = wandb.config.batch_size
-  epochs = wandb.config.epochs
-  
+
   # read data files from path
   train_set = torch.load('data/processed/train_set.pth')
   val_set = torch.load('data/processed/val_set.pth')
   
   # create data loaders
-  trainloader, valloader = get_dataloaders(train_set, val_set, bs = bs)
+  trainloader, valloader = get_dataloaders(train_set, val_set, bs = wandb.config.batch_size)
 
   # init model
-  model = get_model(dropout=dropout)
+  model = get_model(dropout=wandb.config.dropout)
   
   # define optimizer
-  optimizer = get_optimizer(model, lr, optimizer=optimizer)
+  optimizer = get_optimizer(model, lr = wandb.config.lr, 
+                            weight_decay = wandb.config.weight_decay, 
+                            optimizer=wandb.config.optimizer)
   
-  for e in range(epochs):
+  for e in range(wandb.config.epochs):
     print(f'[EPOCH]: {e+1:3d}')
 
     train_loss, train_acc = train_one_epoch(model, trainloader, optimizer)
