@@ -35,10 +35,8 @@ def train():
   lr  =  wandb.config.lr
   dropout = wandb.config.dropout
   optimizer = wandb.config.optimizer
-  
-  # define constant hyper parametners
-  bs = 256
-  epochs = 5
+  bs = wandb.config.batch_size
+  epochs = wandb.config.epochs
   
   # read data files from path
   train_set = torch.load('data/processed/train_set.pth')
