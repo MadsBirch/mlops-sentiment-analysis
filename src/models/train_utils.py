@@ -20,12 +20,12 @@ def get_dataloaders(train_set, val_set, bs):
 def get_model(dropout = float):
   return BertSentiment(n_classes=3, dropout=dropout).to(device)
 
-def get_optimizer(model, lr, optimizer = 'adam'):
+def get_optimizer(model, lr, weight_decay, optimizer = 'adam'):
   if optimizer == 'adam':
-    return optim.Adam(model.parameters(), lr=lr)
+    return optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
   
   elif optimizer == 'sgd':
-    return optim.SGD(model.parameters(), momentum=0.9, lr=lr)  
+    return optim.SGD(model.parameters(), momentum=0.9, lr=lr, weight_decay=weight_decay)  
 
 def train_one_epoch(model, trainloader, optimizer):
   
