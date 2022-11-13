@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
-import click
+import gzip
+import json
 import logging
+import os
+import urllib
 from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
 
+import click
 import pandas as pd
-import gzip, json, os, urllib
-
 import torch
-from transformers import BertTokenizer
+from dotenv import find_dotenv, load_dotenv
 from sklearn.model_selection import train_test_split
-from src.data.AmazonReviewData import AmazonReviewsDataset
+from transformers import BertTokenizer
 
+from src.data.AmazonReviewData import AmazonReviewsDataset
 
 # define a pretrained tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')

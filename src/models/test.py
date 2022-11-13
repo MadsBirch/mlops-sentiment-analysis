@@ -1,9 +1,10 @@
-import yaml
-import wandb
-import torch
 import click
+import torch
+import yaml
 
-from src.models.train_utils import get_dataloaders, get_model, evaluate_one_epoch
+import wandb
+from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
+                                    get_model)
 
 # load hyper parameters to sweep over from config file
 with open('conf/conf_train.yaml') as file:

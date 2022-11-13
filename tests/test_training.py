@@ -1,6 +1,6 @@
 import pytest
-from src.models.train_utils import get_optimizer, get_model
 
+from src.models.train_utils import get_model, get_optimizer
 
 """
 Using pytest.raises, we check that the ValueError for the optimizer choice works correctly.

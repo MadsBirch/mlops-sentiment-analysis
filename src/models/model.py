@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from transformers import BertModel
 
+
 class BertSentiment(nn.Module):
   def __init__(self, n_classes: int, dropout = 0.3, bert_out_dim = 768):
     super(BertSentiment, self).__init__()

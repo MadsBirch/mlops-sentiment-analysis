@@ -1,7 +1,9 @@
 import os
+
 import pytest
 from hydra import compose, initialize
-from  .src.data.AmazonReviewsData import AmazonReviewsDataset
+
+from .src.data.AmazonReviewsData import AmazonReviewsDataset
 
 
 def test_loaders_len_split():

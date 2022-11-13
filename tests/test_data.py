@@ -1,6 +1,7 @@
 import os
-import torch
+
 import pytest
+import torch
 import torch.utils.data as data
 
 """
