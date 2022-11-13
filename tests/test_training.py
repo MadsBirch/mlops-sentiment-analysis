@@ -1,4 +1,3 @@
-import yaml
 import pytest
 from src.models.train_utils import get_optimizer, get_model
 
