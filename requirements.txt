@@ -46,7 +46,6 @@ setproctitle==1.3.2
 shortuuid==1.0.10
 six==1.16.0
 smmap==5.0.0
--e git+https://github.com/MadsBirch/mlops-sentiment-analysis.git@06026f136b6e8fbaa79b83391bd52fd927840245#egg=src
 threadpoolctl==3.1.0
 tokenizers==0.13.2
 tomli==2.0.1
