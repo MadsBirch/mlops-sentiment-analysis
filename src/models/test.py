@@ -2,7 +2,6 @@ import click
 import torch
 import yaml
 
-import wandb
 from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
                                     get_model)
 
