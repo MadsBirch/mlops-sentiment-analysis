@@ -17,15 +17,18 @@ def get_dataloaders(train_set, val_set, bs):
   valloader = DataLoader(val_set, batch_size=bs, shuffle=False, num_workers=0)
   return trainloader, valloader
 
-def get_model(dropout = float):
+def get_model(dropout = 0.3):
   return BertSentiment(n_classes=3, dropout=dropout).to(device)
 
-def get_optimizer(model, lr, weight_decay, optimizer = 'adam'):
+def get_optimizer(model, lr: float, weight_decay: float, optimizer = str):
   if optimizer == 'adam':
     return optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
   
   elif optimizer == 'sgd':
-    return optim.SGD(model.parameters(), momentum=0.9, lr=lr, weight_decay=weight_decay)  
+    return optim.SGD(model.parameters(), momentum=0.9, lr=lr, weight_decay=weight_decay)
+  
+  else:
+    raise ValueError("Illegal optimizer! Specify optimizer as 'sgd' or 'adam'")  
 
 def train_one_epoch(model, trainloader, optimizer):
   

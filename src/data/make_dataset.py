@@ -44,7 +44,7 @@ def sentiment_map(x):
     return 1
 
 
-def preprocess_data(raw_data_path, max_len = 24, train_split = 0.7, val_split = 0.1):
+def preprocess_data(raw_data_path, max_len = 24, train_split = 0.8, val_split = 0.1):
   
   # get pandas df
   df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
@@ -84,10 +84,10 @@ def main(input_filepath, output_filepath):
     if not os.path.isfile(filename):
         urllib.request.urlretrieve(url, filename)
     
-    # get train and test set from input path -> save to output path
+    # get train, validation and test set from input path -> save to output path
     train_set, val_set, test_set = preprocess_data(input_filepath)
     torch.save(train_set, output_filepath+'/train_set.pth')
-    torch.save(train_set, output_filepath+'/val_set.pth')
+    torch.save(val_set, output_filepath+'/val_set.pth')
     torch.save(test_set, output_filepath+'/test_set.pth')
 
 

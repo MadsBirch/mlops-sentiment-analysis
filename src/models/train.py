@@ -11,7 +11,7 @@ device = "mps" if torch.backends.mps.is_available() else "cpu"
 
 # load hyper parameters to sweep over from config file
 with open('conf/conf_train.yaml') as file:
-      config = yaml.load(file, Loader=yaml.FullLoader)
+  config = yaml.load(file, Loader=yaml.FullLoader)  
             
 # initialize wandb
 wandb.login(key = "bd3fd38b22f78a0420f42abfc8b978d7ae49d44c")
