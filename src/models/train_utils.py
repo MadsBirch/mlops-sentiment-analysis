@@ -11,10 +11,11 @@ from src.models.model import BertSentiment
 device = "mps" if torch.backends.mps.is_available() else "cpu"
 loss_fn = nn.CrossEntropyLoss().to(device)
 
-def get_dataloaders(train_set, val_set, bs):
+def get_dataloaders(train_set, val_set, test_set, bs: int):
   trainloader = DataLoader(train_set, batch_size=bs, shuffle=True, num_workers=0)
   valloader = DataLoader(val_set, batch_size=bs, shuffle=False, num_workers=0)
-  return trainloader, valloader
+  testloader = DataLoader(test_set, batch_size=bs, shuffle=False, num_workers=0)
+  return trainloader, valloader, testloader
 
 def get_model(dropout = 0.3):
   return BertSentiment(n_classes=3, dropout=dropout).to(device)

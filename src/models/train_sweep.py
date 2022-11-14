@@ -34,9 +34,10 @@ def train():
   # read data files from path
   train_set = torch.load('data/processed/train_set.pth')
   val_set = torch.load('data/processed/val_set.pth')
+  test_set = torch.load('data/processed/test_set.pth')
   
   # create data loaders
-  trainloader, valloader = get_dataloaders(train_set, val_set, bs = wandb.config.batch_size)
+  trainloader, valloader, _ = get_dataloaders(train_set, val_set, test_set, bs = wandb.config.batch_size)
 
   # init model
   model = get_model(dropout=wandb.config.dropout)
