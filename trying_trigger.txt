@@ -1,1 +1,0 @@
-"Hello, just pushing something to repo to check that the trigger from gcp is working"
