@@ -4,3 +4,4 @@
     url = gdrive://1n4cIq8BP10163oTEqjmKHLhWgVR-eUXJ
 ['remote "remote_storage"']
     url = gs://bucket-mlops-project-1/
+    
