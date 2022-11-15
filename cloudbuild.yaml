@@ -4,4 +4,3 @@ steps:
 
 - name: 'gcr.io/cloud-builders/docker' 
   args: ['push','gcr.io/mlops-sentiment-analysis-gcp/mlops-sentiment-analysis-image']
-
