@@ -1,3 +1,6 @@
-yaml steps:
-name: 'gcr.io/cloud-builders/docker' args: ['build', '-t', 'gcr.io//', '.']
-name: 'gcr.io/cloud-builders/docker' args: ['push', 'gcr.io//']
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build','-t','gcr.io//','.']
+
+- name: 'gcr.io/cloud-builders/docker' 
+  args: ['push','gcr.io//']
