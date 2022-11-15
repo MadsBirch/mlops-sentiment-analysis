@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build','-t','gcr.io/mlops-sentiment-analysis-gcp/first-image','.']
+  args: ['build','-t','gcr.io/mlops-sentiment-analysis-gcp/','.']
 
 - name: 'gcr.io/cloud-builders/docker' 
-  args: ['push','gcr.io/mlops-sentiment-analysis-gcp/first-image']
+  args: ['push','gcr.io/mlops-sentiment-analysis-gcp/']
