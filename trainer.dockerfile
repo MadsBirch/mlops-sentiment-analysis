@@ -1,3 +1,5 @@
+# I THINK IT CAN BE DELETED
+
 # Base image
 FROM python:3.10-slim
 
