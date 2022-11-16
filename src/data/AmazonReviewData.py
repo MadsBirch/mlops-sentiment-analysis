@@ -1,6 +1,7 @@
 import torch
 import torch.utils.data as data
 
+
 class AmazonReviewsDataset(data.Dataset):
   def __init__(self, df, tokenizer, max_len):
     self.df = df

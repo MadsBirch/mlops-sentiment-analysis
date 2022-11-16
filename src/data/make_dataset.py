@@ -5,11 +5,11 @@ import logging
 import os
 import urllib
 from pathlib import Path
-import yaml
 
 import click
 import pandas as pd
 import torch
+import yaml
 from dotenv import find_dotenv, load_dotenv
 from sklearn.model_selection import train_test_split
 from transformers import BertTokenizer

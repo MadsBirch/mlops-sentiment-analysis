@@ -1,13 +1,30 @@
-name: Run isort
-on:
-  - push
+name: "Run isort"
 
+on:
+  push:
+    branches: [ master, main, mads ]
+  pull_request:
+    branches: [ master, main, mads ]
+  
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: isort/isort-action@v1.0.0
-        with:
-            sortPaths: src
-            requirementsFiles: "requirements.txt requirements-test.txt"
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt
+        pip install -r requirements_tests.txt
+    - name: Run isort
+      run: |
+        pip install isort
+        isort sort-paths src
