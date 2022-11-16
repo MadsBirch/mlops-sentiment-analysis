@@ -27,4 +27,4 @@ jobs:
     - name: Run isort
       run: |
         pip install isort
-        isort sort-paths src
+        isort src
