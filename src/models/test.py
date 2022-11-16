@@ -3,8 +3,7 @@ import torch
 import yaml
 
 import wandb
-from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
-                                    get_model)
+from src.models.train_utils import evaluate_one_epoch, get_dataloaders, get_model
 
 # load hyper parameters to sweep over from config file
 with open("conf/conf_train.yaml") as file:

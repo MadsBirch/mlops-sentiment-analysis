@@ -3,8 +3,13 @@ import torch.nn as nn
 import yaml
 
 import wandb
-from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
-                                    get_model, get_optimizer, train_one_epoch)
+from src.models.train_utils import (
+    evaluate_one_epoch,
+    get_dataloaders,
+    get_model,
+    get_optimizer,
+    train_one_epoch,
+)
 
 # set device to Apple M1 GPU if available
 device = "mps" if torch.backends.mps.is_available() else "cpu"
