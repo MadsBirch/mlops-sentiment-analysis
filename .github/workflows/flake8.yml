@@ -1,23 +1,26 @@
-name: flake8 Lint
+name: "Run flake8"
 
-on: [push, pull_request]
-
+on:
+  push:
+    branches: [ master, main, mads ]
+  pull_request:
+    branches: [ master, main, mads ]
+  
 jobs:
-  flake8-lint:
+  build:
+
     runs-on: ubuntu-latest
-    name: Lint
+    
     steps:
-      - name: Check out source repository
-        uses: actions/checkout@v3
-      - name: Set up Python environment
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - name: flake8 Lint
-        uses: py-actions/flake8@v2
-        with:
-          ignore: "F401"
-          exclude: "src/ignoreme.py"
-          max-line-length: "100"
-          path: "src"
-          plugins: "flake8-bugbear==22.1.11 flake8-black"
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9      
+    - name: Lint with flake8
+      uses: TrueBrain/actions-flake8@v2
+      with:
+        path: src
+        max-line-length: "100"
+        only_warn: 1
