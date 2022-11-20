@@ -11,7 +11,7 @@ COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 COPY test_environment.py test_environment.py
 COPY src/ src/
-COPY data/ data/
+COPY src/data/ src/data/
 COPY conf/ conf/
 COPY Makefile Makefile
 
