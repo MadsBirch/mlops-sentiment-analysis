@@ -1,5 +1,3 @@
-# I THINK IT CAN BE DELETED
-
 # Base image
 FROM python:3.10-slim
 
@@ -13,7 +11,7 @@ COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 COPY test_environment.py test_environment.py
 COPY src/ src/
-COPY data/ data/
+COPY src/data/ src/data/
 COPY conf/ conf/
 COPY Makefile Makefile
 
@@ -29,5 +27,3 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 # Name our training script as the entrypoint (CMD) for our docker image. The entrypoint is the application that we want to run when the image is being executed:
 CMD ["make", "train"]
-
-#
