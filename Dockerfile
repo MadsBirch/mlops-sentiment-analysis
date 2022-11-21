@@ -3,8 +3,8 @@ FROM python:3.10-slim
 
 # Install python 
 RUN apt update && \
-apt install --no-install-recommends -y build-essential gcc && \
-apt clean && rm -rf /var/lib/apt/lists/*
+    apt install --no-install-recommends -y build-essential gcc && \
+    apt clean && rm -rf /var/lib/apt/lists/*
 
 # Copy over our application (the essential parts) from our computer to the container:
 COPY requirements.txt requirements.txt
@@ -12,8 +12,10 @@ COPY setup.py setup.py
 COPY test_environment.py test_environment.py
 COPY src/ src/
 COPY src/data/ src/data/
+COPY data/ data/
 COPY conf/ conf/
 COPY Makefile Makefile
+COPY cloudbuild.yaml cloudbuild.yaml
 
 # Installs git into the Docker image:
 RUN apt-get update && apt-get install git -y
