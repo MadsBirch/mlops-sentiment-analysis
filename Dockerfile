@@ -15,6 +15,7 @@ COPY data/ data/
 COPY conf/ conf/
 COPY Makefile Makefile
 COPY cloudbuild.yaml cloudbuild.yaml
+COPY models/ models/
 
 # Installs git into the Docker image:
 RUN apt-get update && apt-get install git -y
