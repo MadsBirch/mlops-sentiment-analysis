@@ -3,8 +3,8 @@ FROM python:3.10-slim
 
 # Install python 
 RUN apt update && \
-apt install --no-install-recommends -y build-essential gcc && \
-apt clean && rm -rf /var/lib/apt/lists/*
+    apt install --no-install-recommends -y build-essential gcc && \
+    apt clean && rm -rf /var/lib/apt/lists/*
 
 # Copy over our application (the essential parts) from our computer to the container:
 COPY requirements.txt requirements.txt
@@ -14,6 +14,8 @@ COPY src/ src/
 COPY data/ data/
 COPY conf/ conf/
 COPY Makefile Makefile
+COPY cloudbuild.yaml cloudbuild.yaml
+COPY models/ models/
 
 # Installs git into the Docker image:
 RUN apt-get update && apt-get install git -y
@@ -26,4 +28,4 @@ WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
 # Name our training script as the entrypoint (CMD) for our docker image. The entrypoint is the application that we want to run when the image is being executed:
-CMD ["make", "train"]
+ENTRYPOINT ["make", "train"]

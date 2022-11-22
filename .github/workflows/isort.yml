@@ -1,0 +1,25 @@
+name: "Run isort"
+
+on:
+  push:
+    branches: [ master, main, mads ]
+  pull_request:
+    branches: [ master, main, mads ]
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+        cache: 'pip'
+    - name: Run isort
+      run: |
+        pip install isort
+        isort src

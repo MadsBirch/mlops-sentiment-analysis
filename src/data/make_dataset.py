@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
-import click
+import gzip
+import json
 import logging
+import os
+import urllib
 from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
 
+import click
 import pandas as pd
-import gzip, json, os, urllib
-
 import torch
-from transformers import BertTokenizer
+import yaml
+from dotenv import find_dotenv, load_dotenv
 from sklearn.model_selection import train_test_split
+from transformers import BertTokenizer
+
 from src.data.AmazonReviewData import AmazonReviewsDataset
 
+# load hyper parameters to sweep over from config file
+with open('conf/conf_data.yaml') as file:
+  config = yaml.load(file, Loader=yaml.FullLoader)
 
 # define a pretrained tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
@@ -44,7 +51,10 @@ def sentiment_map(x):
     return 1
 
 
-def preprocess_data(raw_data_path, max_len = 24, train_split = 0.7, val_split = 0.1):
+def preprocess_data(raw_data_path, 
+                    max_len = 24, 
+                    train_split = config['train_split'], 
+                    val_split = config['val_split']):
   
   # get pandas df
   df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
@@ -58,7 +68,7 @@ def preprocess_data(raw_data_path, max_len = 24, train_split = 0.7, val_split = 
   
   # split into train, validation and test set
   train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
-  train_df, val_df = train_test_split(train_df, train_size=0.9, random_state=0)
+  train_df, val_df = train_test_split(train_df, train_size=1-val_split, random_state=0)
   
   train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
   val_set = AmazonReviewsDataset(val_df, tokenizer=tokenizer, max_len=max_len)
@@ -82,12 +92,12 @@ def main(input_filepath, output_filepath):
     name = url.split("/")[-1] 
     filename = os.path.join(input_filepath, name)
     if not os.path.isfile(filename):
-        urllib.request.urlretrieve(url, filename)
+      urllib.request.urlretrieve(url, filename)
     
-    # get train and test set from input path -> save to output path
+    # get train, validation and test set from input path -> save to output path
     train_set, val_set, test_set = preprocess_data(input_filepath)
     torch.save(train_set, output_filepath+'/train_set.pth')
-    torch.save(train_set, output_filepath+'/val_set.pth')
+    torch.save(val_set, output_filepath+'/val_set.pth')
     torch.save(test_set, output_filepath+'/test_set.pth')
 
 

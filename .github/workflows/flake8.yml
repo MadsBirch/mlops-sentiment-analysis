@@ -1,0 +1,25 @@
+name: "Run flake8"
+
+on:
+  push:
+    branches: [ master, main, mads ]
+  pull_request:
+    branches: [ master, main, mads ]
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9      
+    - name: Lint with flake8
+      uses: TrueBrain/actions-flake8@v2
+      with:
+        path: src
+        max_line_length: "100"
