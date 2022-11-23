@@ -2,9 +2,9 @@ name: "Run flake8"
 
 on:
   push:
-    branches: [ master, main, mads ]
+    branches: [ master, main, mads, flake8-branch ]
   pull_request:
-    branches: [ master, main, mads ]
+    branches: [ master, main, mads, flake8-branch ]
   
 jobs:
   build:
