@@ -54,29 +54,29 @@ def sentiment_map(x):
 
 
 def preprocess_data(raw_data_path, 
-                    max_len = 24, 
-                    train_split = config['train_split'], 
-                    val_split = config['val_split']):
+                    max_len=24, 
+                    train_split=config['train_split'], 
+                    val_split=config['val_split']):
   
-  # get pandas df
-  df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
+    # get pandas df
+    df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
   
-  # subset columns and rename to more intuitive names 
-  df = df[['overall', 'reviewText']]
-  df = df.rename(columns={'overall': 'sentiment', 'reviewText': 'review'})
+    # subset columns and rename to more intuitive names 
+    df = df[['overall', 'reviewText']]
+    df = df.rename(columns={'overall': 'sentiment', 'reviewText': 'review'})
   
-  # do sentiment mapping
-  df.sentiment = df.sentiment.apply(sentiment_map)
+    # do sentiment mapping
+    df.sentiment = df.sentiment.apply(sentiment_map)
   
-  # split into train, validation and test set
-  train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
-  train_df, val_df = train_test_split(train_df, train_size=1-val_split, random_state=0)
+    # split into train, validation and test set
+    train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
+    train_df, val_df = train_test_split(train_df, train_size=1-val_split, random_state=0)
   
-  train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
-  val_set = AmazonReviewsDataset(val_df, tokenizer=tokenizer, max_len=max_len)
-  test_set = AmazonReviewsDataset(test_df, tokenizer=tokenizer, max_len=max_len)
+    train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
+    val_set = AmazonReviewsDataset(val_df, tokenizer=tokenizer, max_len=max_len)
+    test_set = AmazonReviewsDataset(test_df, tokenizer=tokenizer, max_len=max_len)
     
-  return train_set, val_set, test_set
+    return train_set, val_set, test_set
 
 
 @click.command()
