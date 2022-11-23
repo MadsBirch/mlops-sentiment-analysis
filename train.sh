@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUCKET_NAME=mlops-data-bucket
-JOB_NAME=save_to_bucket
+JOB_NAME=bucket_10_epochs
 
 gcloud ai-platform jobs submit training ${JOB_NAME} \
     --region=europe-west1 \
