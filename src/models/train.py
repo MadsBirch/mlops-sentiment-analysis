@@ -70,7 +70,7 @@ def train():
         )
 
     # save final model
-    torch.save(model.state_dict(), "models/final_model.pth")
+    torch.save(model.state_dict(), "gs://mlops-data-bucket/models/final_model.pth")
 
 
 if __name__ == "__main__":
