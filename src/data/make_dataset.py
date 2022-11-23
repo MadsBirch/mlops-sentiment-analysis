@@ -64,18 +64,18 @@ def preprocess_data(raw_data_path,
     # subset columns and rename to more intuitive names
     df = df[['overall', 'reviewText']]
     df = df.rename(columns={'overall': 'sentiment', 'reviewText': 'review'})
-  
+
     # do sentiment mapping
     df.sentiment = df.sentiment.apply(sentiment_map)
-  
+
     # split into train, validation and test set
     train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
     train_df, val_df = train_test_split(train_df, train_size=1-val_split, random_state=0)
-  
+
     train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
     val_set = AmazonReviewsDataset(val_df, tokenizer=tokenizer, max_len=max_len)
     test_set = AmazonReviewsDataset(test_df, tokenizer=tokenizer, max_len=max_len)
-    
+ 
     return train_set, val_set, test_set
 
 
@@ -88,14 +88,14 @@ def main(input_filepath, output_filepath):
     """
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
-    
+
     # download dataset file if not in folder
     url = 'http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automotive_5.json.gz'
     name = url.split("/")[-1] 
     filename = os.path.join(input_filepath, name)
     if not os.path.isfile(filename):
-       urllib.request.urlretrieve(url, filename)
-    
+        urllib.request.urlretrieve(url, filename)
+
     # get train, validation and test set from input path -> save to output path
     train_set, val_set, test_set = preprocess_data(input_filepath)
     torch.save(train_set, output_filepath+'/train_set.pth')
