@@ -52,7 +52,7 @@ def sentiment_map(x):
 
 
 def preprocess_data(raw_data_path, 
-                    max_len = 24, 
+                    max_len = config['max_len'], 
                     train_split = config['train_split'], 
                     val_split = config['val_split']):
   
