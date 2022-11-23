@@ -30,14 +30,14 @@ def parse(path):
   for z in g:
     yield json.loads(z)
 
+
 # create pandas DF
 def get_pandas_DF(path):
   i = 0
   df = {}
   for d in parse(path):
     df[i] = d
-    i += 1
- 
+    i += 1  
   return pd.DataFrame.from_dict(df, orient='index')
 
 
