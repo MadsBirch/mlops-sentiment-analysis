@@ -23,11 +23,12 @@ with open('conf/conf_data.yaml') as file:
 # define a pretrained tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
 
+
 # load zipped json file
 def parse(path):
   g = gzip.open(path, 'rb')
-  for l in g:
-    yield json.loads(l)
+  for z in g:
+    yield json.loads(z)
 
 # create pandas DF
 def get_pandas_DF(path):
@@ -38,6 +39,7 @@ def get_pandas_DF(path):
     i += 1
  
   return pd.DataFrame.from_dict(df, orient='index')
+
 
 # map rating into sentiment scores
 def sentiment_map(x):
