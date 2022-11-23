@@ -10,10 +10,10 @@ from src.models.model import BertSentiment
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
 if cuda_availability:
-  device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
+    device = torch.device("cuda:{}".format(torch.cuda.current_device()))
 else:
-  device = 'cpu'
-  
+    device = "cpu"
+
 loss_fn = nn.CrossEntropyLoss().to(device)
 
 
@@ -34,7 +34,8 @@ def get_optimizer(model, lr: float, weight_decay: float, optimizer=str):
 
     elif optimizer == "sgd":
         return optim.SGD(
-            model.parameters(), momentum=0.9, lr=lr, weight_decay=weight_decay)
+            model.parameters(), momentum=0.9, lr=lr, weight_decay=weight_decay
+        )
 
     else:
         raise ValueError("Illegal optimizer! Specify optimizer as 'sgd' or 'adam'")

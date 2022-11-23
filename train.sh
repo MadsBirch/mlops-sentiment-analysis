@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUCKET_NAME=mlops-data-bucket
-JOB_NAME=gpu_job_2
+JOB_NAME=gpu_max_len_256
 
 gcloud ai-platform jobs submit training ${JOB_NAME} \
     --region=europe-west1 \
