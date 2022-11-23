@@ -59,7 +59,7 @@ def preprocess_data(raw_data_path,
                     val_split=config['val_split']):
 
     # get pandas df
-    df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
+    df = get_pandas_DF(raw_data_path + '/reviews_Automotive_5.json.gz')
 
     # subset columns and rename to more intuitive names
     df = df[['overall', 'reviewText']]
@@ -70,7 +70,7 @@ def preprocess_data(raw_data_path,
 
     # split into train, validation and test set
     train_df, test_df = train_test_split(df, train_size=train_split, random_state=0)
-    train_df, val_df = train_test_split(train_df, train_size=1-val_split, random_state=0)
+    train_df, val_df = train_test_split(train_df, train_size=1 - val_split, random_state=0)
 
     train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
     val_set = AmazonReviewsDataset(val_df, tokenizer=tokenizer, max_len=max_len)
@@ -98,9 +98,9 @@ def main(input_filepath, output_filepath):
 
     # get train, validation and test set from input path -> save to output path
     train_set, val_set, test_set = preprocess_data(input_filepath)
-    torch.save(train_set, output_filepath+'/train_set.pth')
-    torch.save(val_set, output_filepath+'/val_set.pth')
-    torch.save(test_set, output_filepath+'/test_set.pth')
+    torch.save(train_set, output_filepath + '/train_set.pth')
+    torch.save(val_set, output_filepath + '/val_set.pth')
+    torch.save(test_set, output_filepath + '/test_set.pth')
 
 
 if __name__ == '__main__':
