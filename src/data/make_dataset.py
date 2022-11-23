@@ -37,7 +37,7 @@ def get_pandas_DF(path):
     df = {}
     for d in parse(path):
         df[i] = d
-        i += 1  
+        i += 1
     return pd.DataFrame.from_dict(df, orient='index')
 
 
@@ -45,23 +45,23 @@ def get_pandas_DF(path):
 def sentiment_map(x):
     if x < 3:
         return 0
-  
+
     elif x > 3:
         return 2
-  
+
     else:
         return 1
 
 
-def preprocess_data(raw_data_path, 
-                    max_len=24, 
-                    train_split=config['train_split'], 
+def preprocess_data(raw_data_path,
+                    max_len=24,
+                    train_split=config['train_split'],
                     val_split=config['val_split']):
-  
+
     # get pandas df
     df = get_pandas_DF(raw_data_path+'/reviews_Automotive_5.json.gz')
-  
-    # subset columns and rename to more intuitive names 
+
+    # subset columns and rename to more intuitive names
     df = df[['overall', 'reviewText']]
     df = df.rename(columns={'overall': 'sentiment', 'reviewText': 'review'})
   
@@ -94,7 +94,7 @@ def main(input_filepath, output_filepath):
     name = url.split("/")[-1] 
     filename = os.path.join(input_filepath, name)
     if not os.path.isfile(filename):
-      urllib.request.urlretrieve(url, filename)
+       urllib.request.urlretrieve(url, filename)
     
     # get train, validation and test set from input path -> save to output path
     train_set, val_set, test_set = preprocess_data(input_filepath)

@@ -1,9 +1,5 @@
 import torch
-import torch.nn.functional as F
-import torch.optim as optim
 import yaml
-from torch.utils.data import DataLoader
-from tqdm import tqdm
 
 import wandb
 from src.models.train_utils import (
@@ -17,9 +13,9 @@ from src.models.train_utils import (
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
 if cuda_availability:
-  device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
+    device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
 else:
-  device = 'cpu'
+    device = 'cpu'
   
 
 # load hyper parameters to sweep over from config file
