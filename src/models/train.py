@@ -1,5 +1,4 @@
 import torch
-import torch.nn as nn
 import yaml
 
 import wandb
@@ -14,9 +13,9 @@ from src.models.train_utils import (
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
 if cuda_availability:
-  device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
+    device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
 else:
-  device = 'cpu'
+    device = 'cpu'
 
 # load hyper parameters to sweep over from config file
 with open("conf/conf_train.yaml") as file:

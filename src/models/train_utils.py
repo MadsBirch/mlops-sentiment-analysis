@@ -10,10 +10,10 @@ from src.models.model import BertSentiment
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
 if cuda_availability:
-  device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
+    device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
 else:
-  device = 'cpu'
-  
+    device = 'cpu'
+
 loss_fn = nn.CrossEntropyLoss().to(device)
 
 
