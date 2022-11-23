@@ -13,7 +13,7 @@ class AmazonReviewsDataset(data.Dataset):
 
     def __getitem__(self, idx):
         review = self.df['review'].iloc[idx]
-        sentiment = torch.tensor(int(self.df['sentiment'].iloc[idx]), dtype = torch.long)
+        sentiment = torch.tensor(int(self.df['sentiment'].iloc[idx]), dtype=torch.long)
 
         encoding = self.tokenizer.encode_plus(
             review,

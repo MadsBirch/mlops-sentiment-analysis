@@ -18,7 +18,7 @@ from src.data.AmazonReviewData import AmazonReviewsDataset
 
 # load hyper parameters to sweep over from config file
 with open('conf/conf_data.yaml') as file:
-  config = yaml.load(file, Loader=yaml.FullLoader)
+    config = yaml.load(file, Loader=yaml.FullLoader)
 
 # define a pretrained tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
@@ -26,31 +26,31 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
 
 # load zipped json file
 def parse(path):
-  g = gzip.open(path, 'rb')
-  for z in g:
-    yield json.loads(z)
+    g = gzip.open(path, 'rb')
+    for z in g:
+        yield json.loads(z)
 
 
 # create pandas DF
 def get_pandas_DF(path):
-  i = 0
-  df = {}
-  for d in parse(path):
-    df[i] = d
-    i += 1  
-  return pd.DataFrame.from_dict(df, orient='index')
+    i = 0
+    df = {}
+    for d in parse(path):
+        df[i] = d
+        i += 1  
+    return pd.DataFrame.from_dict(df, orient='index')
 
 
 # map rating into sentiment scores
 def sentiment_map(x):
-  if x < 3:
-    return 0
+    if x < 3:
+        return 0
   
-  elif x > 3:
-    return 2
+    elif x > 3:
+        return 2
   
-  else:
-    return 1
+    else:
+        return 1
 
 
 def preprocess_data(raw_data_path, 
