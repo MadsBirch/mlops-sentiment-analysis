@@ -75,7 +75,7 @@ def preprocess_data(raw_data_path,
     train_set = AmazonReviewsDataset(train_df, tokenizer=tokenizer, max_len=max_len)
     val_set = AmazonReviewsDataset(val_df, tokenizer=tokenizer, max_len=max_len)
     test_set = AmazonReviewsDataset(test_df, tokenizer=tokenizer, max_len=max_len)
- 
+
     return train_set, val_set, test_set
 
 
@@ -91,7 +91,7 @@ def main(input_filepath, output_filepath):
 
     # download dataset file if not in folder
     url = 'http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automotive_5.json.gz'
-    name = url.split("/")[-1] 
+    name = url.split("/")[-1]
     filename = os.path.join(input_filepath, name)
     if not os.path.isfile(filename):
         urllib.request.urlretrieve(url, filename)

@@ -13,7 +13,7 @@ if cuda_availability:
     device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
 else:
     device = 'cpu'
-  
+
 loss_fn = nn.CrossEntropyLoss().to(device)
 
 
