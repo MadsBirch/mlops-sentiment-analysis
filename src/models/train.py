@@ -1,5 +1,4 @@
 import torch
-import torch.nn as nn
 import yaml
 from google.cloud import storage
 
@@ -70,14 +69,15 @@ def train():
                 "val_loss": val_loss,
             }
         )
-    
+
     # save final to gcp bucket model
     storage_client = storage.Client("mlops-data-bucket")
     bucket = storage_client.bucket("mlops-data-bucket")
     blob = bucket.blob("models/model.pth")
-    
+
     with blob.open("wb", ignore_flush=True) as f:
         torch.save(model.state_dict(), f)
+
 
 if __name__ == "__main__":
     train()
