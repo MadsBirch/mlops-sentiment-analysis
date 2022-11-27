@@ -1,5 +1,7 @@
 import torch
+import torch.nn as nn
 import yaml
+from google.cloud import storage
 
 import wandb
 from src.models.train_utils import (
@@ -13,9 +15,9 @@ from src.models.train_utils import (
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
 if cuda_availability:
-    device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
+    device = torch.device("cuda:{}".format(torch.cuda.current_device()))
 else:
-    device = 'cpu'
+    device = "cpu"
 
 # load hyper parameters to sweep over from config file
 with open("conf/conf_train.yaml") as file:
@@ -37,7 +39,8 @@ def train():
 
     # create data loaders
     trainloader, valloader, _ = get_dataloaders(
-        train_set, val_set, test_set, bs=wandb.config.batch_size
+        train_set, val_set, test_set, bs=wandb.config.batch_size,
+        workers=wandb.config.workers
     )
 
     # init model
@@ -67,10 +70,14 @@ def train():
                 "val_loss": val_loss,
             }
         )
-
-    # save final model
-    torch.save(model.state_dict(), "models/final_model.pth")
-
+    
+    # save final to gcp bucket model
+    storage_client = storage.Client("mlops-data-bucket")
+    bucket = storage_client.bucket("mlops-data-bucket")
+    blob = bucket.blob("models/model.pth")
+    
+    with blob.open("wb", ignore_flush=True) as f:
+        torch.save(model.state_dict(), f)
 
 if __name__ == "__main__":
     train()
