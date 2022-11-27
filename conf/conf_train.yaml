@@ -4,4 +4,4 @@ batch_size:  256
 epochs: 1
 dropout: 0.3
 weight_decay: 0.001
-workers: 4
+workers: 0
