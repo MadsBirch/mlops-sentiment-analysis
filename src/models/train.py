@@ -39,7 +39,8 @@ def train():
 
     # create data loaders
     trainloader, valloader, _ = get_dataloaders(
-        train_set, val_set, test_set, bs=wandb.config.batch_size
+        train_set, val_set, test_set, bs=wandb.config.batch_size,
+        workers = wandb.config.num_workers
     )
 
     # init model
