@@ -25,6 +25,11 @@ Train model
 Test model:
 - make test
 
+## Results
+
+![Figure 1](https://github.com/MadsBirch/mlops-sentiment-analysis/blob/master/reports/figures/sweep.png?raw=true) <br />
+*Figure 2*
+
 Project Organization
 ------------
 
