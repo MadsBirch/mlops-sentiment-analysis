@@ -2,20 +2,15 @@ import torch
 import yaml
 
 import wandb
-from src.models.train_utils import (
-    evaluate_one_epoch,
-    get_dataloaders,
-    get_model,
-    get_optimizer,
-    train_one_epoch,
-)
+from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
+                                    get_model, get_optimizer, train_one_epoch)
 
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
 if cuda_availability:
-    device = torch.device('cuda:{}'.format(torch.cuda.current_device()))
+    device = torch.device("cuda:{}".format(torch.cuda.current_device()))
 else:
-    device = 'cpu'
+    device = "cpu"
 
 
 # load hyper parameters to sweep over from config file
