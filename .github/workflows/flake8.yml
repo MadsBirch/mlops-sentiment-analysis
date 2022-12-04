@@ -23,4 +23,4 @@ jobs:
       with:
         path: src
         max_line_length: "105"
-        ignore: F841, W293
+        ignore: ["F841", W293"]
