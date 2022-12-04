@@ -26,9 +26,15 @@ Test model:
 - make test
 
 ## Results
+Using Weights and Biases we performed a hyperparameter sweep to identify the importance of the various parameters. We made a sweep over suitable value ranges for the learning rate, weight decay, dropout and the choice of optimizer. The results are summarized in the figures below.
 
 ![Figure 1](https://github.com/MadsBirch/mlops-sentiment-analysis/blob/master/reports/figures/sweep.png?raw=true) <br />
-*Figure 2*
+*Figure 1: Hyper parameter sweep*
+
+![Figure 2](https://github.com/MadsBirch/mlops-sentiment-analysis/blob/master/reports/figures/param_importance.png?raw=true) <br />
+*Figure 2: Table of hyper parameter importance*
+
+
 
 Project Organization
 ------------
