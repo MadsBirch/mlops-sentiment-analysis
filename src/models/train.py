@@ -66,8 +66,8 @@ def train():
                 "train_loss": train_loss,
                 "val_acc": val_acc,
                 "val_loss": val_loss,
-                }
-            )
+            }
+        )
     
     # save final to gcp bucket model
     storage_client = storage.Client("mlops-data-bucket")

@@ -28,8 +28,8 @@ tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 # load zipped json file
 def parse(path):
     g = gzip.open(path, "rb")
-    for l in g:
-        yield json.loads(l)
+    for z in g:
+        yield json.loads(z)
 
 
 # create pandas DF
