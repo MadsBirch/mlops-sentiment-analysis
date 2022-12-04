@@ -3,13 +3,8 @@ import yaml
 from google.cloud import storage
 
 import wandb
-from src.models.train_utils import (
-    evaluate_one_epoch,
-    get_dataloaders,
-    get_model,
-    get_optimizer,
-    train_one_epoch,
-)
+from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
+                                    get_model, get_optimizer, train_one_epoch)
 
 # use CUDA if available
 cuda_availability = torch.cuda.is_available()
