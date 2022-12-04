@@ -25,7 +25,6 @@ with open("conf/conf_data.yaml") as file:
 tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 
 
-
 # load zipped json file
 def parse(path):
     g = gzip.open(path, "rb")
