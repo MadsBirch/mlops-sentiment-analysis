@@ -3,12 +3,14 @@
 
 This is a project on Sentiment Analysis using Transformers for the Machine Learning Operations course at DTU.
 
+## Data
 The dataset of Amazon reviews within the "Automotive" category conists of 20,473 samples and can be found at:
 http://jmcauley.ucsd.edu/data/amazon/links.html
 
 Download link:
 http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automotive_5.json.gz
 
+## Running the project
 The following commands can be run in the directory. In the conf_train_sweep.yaml file, the hyper parameter ranges for the sweep is declared. In the conf_train.yaml the best hyper parameters from the sweep is declared.
 
 Create dataset
