@@ -20,8 +20,10 @@ from src.data.AmazonReviewData import AmazonReviewsDataset
 with open("conf/conf_data.yaml") as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 
+
 # define a pretrained tokenizer
 tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
+
 
 # load zipped json file
 def parse(path):
