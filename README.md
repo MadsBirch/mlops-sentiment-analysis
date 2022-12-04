@@ -1,4 +1,4 @@
-Amazon Review Sentiment Analysis using Transformers
+# Amazon Review Sentiment Analysis using Transformers
 ==============================
 
 This is a project on Sentiment Analysis using Transformers for the Machine Learning Operations course at DTU.
