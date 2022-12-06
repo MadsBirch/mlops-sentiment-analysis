@@ -16,13 +16,13 @@ http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automoti
 ## Running the project
 The following commands can be run in the directory. In the conf_train_sweep.yaml file, the hyper parameter ranges for the sweep is declared. In the conf_train.yaml the best hyper parameters from the sweep is declared.
 
-Create dataset
+Create dataset:
 `make data`
 
-Perform a sweep over hyper parameters
+Perform a sweep over hyper parameters:
 `make sweep`
 
-Train model
+Train model:
 `make train`
 
 Test model:
