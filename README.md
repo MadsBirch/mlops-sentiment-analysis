@@ -1,10 +1,13 @@
 # Amazon Review Sentiment Analysis using Transformers
-==============================
 
-This is a project on Sentiment Analysis using Transformers for the Machine Learning Operations course at DTU.
+## Project decription & goal
+
+This is a project on Sentiment Analysis using [Transformers](https://github.com/huggingface/transformers) for the Machine Learning Operations course at DTU. 
+
+The goal of the project is interpreting customer __feedback__ through product reviews by categorizing the feedback provided by a customer into __positive__, __negative__, and __neutral__ based on the written review. __BERT__ pretrained Natural Language Processing (NLP) model from Google was used. It easily understands the context of a word in a sentence based on previous words in the sentences due to its bi-directional approach.
 
 ## Data
-The dataset of Amazon reviews within the "Automotive" category conists of 20,473 samples and can be found at:
+The dataset of Amazon reviews within the "Automotive" category was used. It conists of 20,473 samples and can be found at:
 http://jmcauley.ucsd.edu/data/amazon/links.html
 
 Download link:
@@ -14,16 +17,16 @@ http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Automoti
 The following commands can be run in the directory. In the conf_train_sweep.yaml file, the hyper parameter ranges for the sweep is declared. In the conf_train.yaml the best hyper parameters from the sweep is declared.
 
 Create dataset
-- make data
+`make data`
 
 Perform a sweep over hyper parameters
-- make sweep
+`make sweep`
 
 Train model
-- make train
+`make train`
 
 Test model:
-- make test
+`make test`
 
 ## Results
 Using Weights and Biases we performed a hyperparameter sweep to identify the importance of the various parameters. We made a sweep over suitable value ranges for the learning rate, weight decay, dropout and the choice of optimizer. The results are summarized in the figures below.
