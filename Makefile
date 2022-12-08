@@ -30,15 +30,19 @@ requirements: test_environment
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
+## Do a training sweep over range of hyper parameters in train_sweep.yaml
 sweep: data
 	$(PYTHON_INTERPRETER) src/models/train_sweep.py 
 
+## Train using the hyper parameters in train.yaml
 train: data
 	$(PYTHON_INTERPRETER) src/models/train.py
 
+## this command is used as entry point for Docker image when training on GCP
 cloud_train: data
 	$(PYTHON_INTERPRETER) src/models/train_cloud.py
 
+## test the model -> print accuracy
 test:
 	$(PYTHON_INTERPRETER) src/models/test.py models/final_model.pth
 
