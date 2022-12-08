@@ -2,7 +2,6 @@ import click
 import torch
 import yaml
 
-import wandb
 from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
                                     get_model)
 
@@ -25,7 +24,7 @@ def test(model_path):
 
     # create data loaders
     _, _, testloader = get_dataloaders(
-        train_set, val_set, test_set, bs=wandb.config.batch_size
+        train_set, val_set, test_set, bs=config['batch_size']
     )
 
     # load trained model from path

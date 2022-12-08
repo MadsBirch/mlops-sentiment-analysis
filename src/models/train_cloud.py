@@ -65,8 +65,13 @@ def train():
             }
         )
     
-    # save model
-    torch.save(model.state_dict(), 'models/final_model.pth')
+    # save final to gcp bucket model
+    storage_client = storage.Client("mlops-data-bucket")
+    bucket = storage_client.bucket("mlops-data-bucket")
+    blob = bucket.blob("models/model.pth")
+    
+    with blob.open("wb", ignore_flush=True) as f:
+        torch.save(model.state_dict(), f)
 
 
 if __name__ == "__main__":

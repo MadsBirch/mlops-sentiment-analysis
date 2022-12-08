@@ -36,6 +36,9 @@ sweep: data
 train: data
 	$(PYTHON_INTERPRETER) src/models/train.py
 
+cloud_train: data
+	$(PYTHON_INTERPRETER) src/models/train_cloud.py
+
 test:
 	$(PYTHON_INTERPRETER) src/models/test.py models/final_model.pth
 

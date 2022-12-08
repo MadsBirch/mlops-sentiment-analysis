@@ -28,4 +28,4 @@ WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
 # Name our training script as the entrypoint (CMD) for our docker image. The entrypoint is the application that we want to run when the image is being executed:
-ENTRYPOINT ["make", "train"]
+ENTRYPOINT ["make", "cloud_train"]
