@@ -1,6 +1,5 @@
 import torch
 import yaml
-from google.cloud import storage
 
 import wandb
 from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
