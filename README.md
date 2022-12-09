@@ -4,7 +4,7 @@
 
 This is a project on Sentiment Analysis using [Transformers](https://github.com/huggingface/transformers) for the Machine Learning Operations course at DTU. 
 
-The goal of the project is interpreting customer __feedback__ through product reviews by categorizing the feedback provided by a customer into __positive__, __negative__, and __neutral__ based on the written review. __BERT__ pretrained Natural Language Processing (NLP) model from Google was used. It easily understands the context of a word in a sentence based on previous words in the sentences due to its bi-directional approach.
+The goal of the project is interpreting customer __feedback__ through product reviews by categorizing the feedback provided by a customer into __positive__, __negative__, and __neutral__ based on the written review. __BERT__ pretrained Natural Language Processing (NLP) model from Google was used, which easily understands the context of a word in a sentence based on previous words in the sentences due to its bi-directional approach.
 
 ## Data
 The dataset of Amazon reviews within the "Automotive" category was used. It conists of 20,473 samples and can be found at:
