@@ -13,6 +13,8 @@ if cuda_availability:
 else:
     device = "cpu"
 
+print(f'Device available: {device}')
+
 # load hyper parameters to sweep over from config file
 with open("conf/conf_train.yaml") as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
