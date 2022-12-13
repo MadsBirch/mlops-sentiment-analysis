@@ -6,11 +6,8 @@ from src.models.train_utils import (evaluate_one_epoch, get_dataloaders,
                                     get_model, get_optimizer, train_one_epoch)
 
 # use CUDA if available
-cuda_availability = torch.cuda.is_available()
-if cuda_availability:
-    device = torch.device("cuda:{}".format(torch.cuda.current_device()))
-else:
-    device = "cpu"
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print('Using device:', device)
 
 # load hyper parameters to sweep over from config file
 with open("conf/conf_train.yaml") as file:
